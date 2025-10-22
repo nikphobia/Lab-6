@@ -1,5 +1,10 @@
-#part 3 (1)
-#
+#part 3 
+# (1)
+
+#1. The amount of countries with no physicians
+#2. The life expectancies associated to which country
+#3. The average tertiary education for women
+
 import pandas as pd
 import seaborn as sns
 
