@@ -68,92 +68,108 @@ print ("number of countries: ", number)
 
 print ("Part 4.___________________________________________________")
 
-# 1
-
-data = pd.read_csv("wdi_wide.csv")
-data["GNI per Capita"] = pd.DataFrame.round(data["GNI"]/data["Population"])
+# 1 Scatter
 
 #plot-male
 
-sns.relplot(
+a = sns.relplot(
     data = data,
     x = "GNI per Capita",
     y = "Life expectancy, male",
-    kind = "scatter"
+    aspect = 1.5
 )
+
+a.fig.suptitle("Life Expectancy (Male) vs GNI per Capita") #title
 
 #plot-female
 
-sns.relplot(
+b= sns.relplot(
     data = data,
     x = "GNI per Capita",
     y = "Life expectancy, female",
-    kind = "scatter"
+    aspect = 1.5
 )
 
+b.fig.suptitle("Life Expectancy (Female) vs GNI per Capita") #title
 
-# 2
+# 2 Scatter + colour
 
 #plot-male
 
-sns.relplot(
+c= sns.relplot(
     data = data,
     x = "GNI per Capita",
     y = "Life expectancy, male",
     hue = "Region",
-    kind = "scatter"
+    aspect = 1.5
 )
+
+c.fig.suptitle("Life Expectancy (Male) vs GNI per Capita, Coloured by Region") #title
 
 #plot-female
 
-sns.relplot(
+d= sns.relplot(
     data = data,
     x = "GNI per Capita",
     y = "Life expectancy, female",
     hue = "Region",
-    kind = "scatter"
+    aspect = 1.5
 )
+
+d.fig.suptitle("Life Expectancy (Female) vs GNI per Capita, Coloured by Region") #title
 
 # 3
 
 #plot-male
 
-sns.relplot(
+e= sns.relplot(
     data = data,
     x = "GNI per Capita",
     y = "Life expectancy, male",
     hue = "Region",
     kind = "line",
-    ci = "sd",
+    errorbar = "sd",
+    aspect = 1.5
 )
+
+e.fig.suptitle("Life Expectancy (Male) vs GNI per Capita - Line Plot with SD")
 
 #plot-female
 
-sns.relplot(
+f = sns.relplot(
     data = data,
     x = "GNI per Capita",
     y = "Life expectancy, female",
     hue = "Region",
     kind = "line",
-    ci = "sd",
+    errorbar = "sd",
+    aspect = 1.5
 )
+
+f.fig.suptitle("Life Expectancy (Female) vs GNI per Capita - Line Plot with SD")
 
 # 4
 
 #plot-male
 
-sns.lmplot(
+g = sns.lmplot(
     data = data,
     x = "GNI per Capita",
     y = "Life expectancy, male",
-    hue = "Region"
+    hue = "Region",
+    aspect = 1.5
     )
+
+g.fig.suptitle("Life Expectancy (Male) vs GNI per Capita - Linear Regression") # title
 
 #plot-female
 
-sns.lmplot(
+h = sns.lmplot(
     data = data,
     x = "GNI per Capita",
     y = "Life expectancy, female",
-    hue = "Region"
+    hue = "Region",
+    aspect = 1.5
 )
+
+h.fig.suptitle("Life Expectancy (Female) vs GNI per Capita - Linear Regression") # title
