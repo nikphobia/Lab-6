@@ -7,6 +7,7 @@
 
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 # (2)
 data=pd.read_csv("wdi_wide.csv")
@@ -173,3 +174,119 @@ h = sns.lmplot(
 )
 
 h.fig.suptitle("Life Expectancy (Female) vs GNI per Capita - Linear Regression") # title
+
+# 5
+
+#Graph 1
+# How does life expectancy of female/male  affect the population in each region?
+sns.relplot(
+    data = data,
+    x="Population", 
+    y="Life expectancy, female", 
+    kind = "scatter",
+    col="Region"
+)
+
+sns.relplot(
+    data = data, 
+    x="Population",
+    y="Life expectancy, male", 
+    kind = "scatter", 
+    col="Region"
+)
+#No there isnt any significant correlation between those two variables.
+
+#Graph 2 How does life expectancy of male/female affect the internet use in each region?
+sns.relplot(
+    data = data, 
+    x="Internet use", 
+    y="Life expectancy, female", 
+    kind = "scatter",
+    col="Region"
+)
+
+sns.relplot(
+    data = data, 
+    x="Internet use", 
+    y="Life expectancy, male", 
+    kind = "scatter", 
+    col="Region"
+)
+#Yes there seems like to be a correlation between the two variables.
+
+#Graph 3 How does life expectancy of male/female affect the number of physicians in each region?
+sns.relplot(
+    data = data, 
+    x="Physicians", 
+    y="Life expectancy, female",
+    kind = "scatter",
+    col="Region"
+)
+
+sns.relplot(
+    data = data,
+    x="Physicians",
+    y="Life expectancy, male",
+    kind = "scatter",
+    col="Region"
+)
+#Yes there is a relationship between the variables, more physicians more health more life expectancy
+
+#Graph 4 How does life expectancy of male/female affect the number of women in nation parliament in each region?
+sns.relplot(
+    data = data, 
+    x="Women in national parliament", 
+    y="Life expectancy, female", 
+    kind = "scatter", 
+    col="Region"
+)
+
+sns.relplot(data = data,
+    x="Women in national parliament",
+    y="Life expectancy, male",
+    kind = "scatter", 
+    col="Region"
+)
+#Yes there is correlation or some effect from one variable to the other.
+
+#Graph 5 How does life expectancy of female/male affect the internation tourism number in each region?
+sns.relplot(
+    data = data, 
+    x="International tourism", 
+    y="Life expectancy, female", 
+    kind = "scatter",
+    col="Region"
+)
+
+sns.relplot(
+    data = data, 
+    x="International tourism",
+    y="Life expectancy, male", 
+    kind = "scatter",
+    col="Region"
+)
+#Yes there is correlation one will make the other.
+
+# 6
+
+data["Emissions per Capita"] = data["Greenhouse gas emissions"] / data["Population"]
+
+# A
+
+sns.relplot(data = data, x="Internet use", y="Emissions per Capita" )
+# According to the plot, the internet use will make more emission
+
+# B
+
+countries_high_emission = data[data["Emissions per Capita"] > 0.03]
+print(countries_high_emission["Country Name"])
+# Brunei Darussalam and Qatar
+
+# C
+
+sns.relplot(data = data, x="Internet use", y="Emissions per Capita", kind = "scatter", col="Region")
+#There is a clear correlation between the two for all regions exept africa and arguably europe
+# D
+
+sns.relplot(data = data, x="High Income Economy", y="Emissions per Capita")
+# Most of the high income countries have high emissions, so there seems to be somewhat of a correlation
